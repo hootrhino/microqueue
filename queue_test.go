@@ -278,15 +278,15 @@ func TestMultiProducerMultiSubscriber(t *testing.T) {
 	defer m.Close()
 
 	queueName := "multi"
-	bufSize := 100 // small buffer to force drops
+	bufSize := 20000 // small buffer to force drops
 	if err := m.CreateQueue(queueName, AckManual, WithBuffer(bufSize)); err != nil {
 		t.Fatal(err)
 	}
 	q, _ := m.GetQueue(queueName)
 
-	totalMessages := 2000
-	producers := 5
-	subscribers := 4
+	totalMessages := 20000
+	producers := 50
+	subscribers := 40
 
 	var mu sync.Mutex
 	processed := 0
